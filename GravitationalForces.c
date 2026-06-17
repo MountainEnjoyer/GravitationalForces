@@ -5,14 +5,14 @@
 #define WIDTH 1200
 #define HEIGHT 600
 #define FPS 60
-#define OBJ 50
+#define OBJ 100
 #define R_OBJ 2
 #define MASS_OBJ 10
 #define BODY 2
 #define MASS1 200
 #define MASS2 500
 #define G 0.0005 // supposed to be 6.67*powf(10,-11);
-
+#define L_TRAIL 1000
 
 
 typedef struct  {
@@ -26,7 +26,7 @@ typedef struct  {
 }Objects;
 
 typedef struct {
-  Vector2 pos[100];
+  Vector2 pos[L_TRAIL];
 }Trail; 
 
 Objects obj[OBJ];
@@ -45,7 +45,7 @@ void InitStructs() {
     obj[i].fx = 0;
     obj[i].fy = 0;
     obj[i].mass = MASS_OBJ;
-    trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
+    trail[i].pos[current_trail] = (Vector2) {obj[i].x, obj[i].y};
   }
   for (int j=0; j<BODY; j++) {
     bodies[j].radius = j<1?50:200;
@@ -56,7 +56,7 @@ void InitStructs() {
     bodies[j].fx = 0;
     bodies[j].fy = 0;
   }
-  current_trail+=1;
+  current_trail = 1;
 }
 
 void DrawStructs() {
@@ -64,10 +64,10 @@ void DrawStructs() {
     DrawCircle(bodies[j].x, bodies[j].y, bodies[j].radius, DARKGRAY);
   }
   for (int i=0; i<OBJ; i++) {
-    DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
     for (int h=0; h<current_trail; h++) {
-      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,WHITE);
+      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
     }
+    DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
   }
 }
 
@@ -90,8 +90,12 @@ void UpdateForces(float dt) {
       obj[i].vy += obj[i].fy * dt;
       obj[i].x += obj[i].vx *dt;
       obj[i].y += obj[i].vy * dt;
+      if (current_trail< L_TRAIL){
+        trail[i].pos[current_trail] = (Vector2) {obj[i].x, obj[i].y};
+      }
     }
   }
+  current_trail +=1;
 }
 
 void ResetForces() {
@@ -109,7 +113,7 @@ void ComputeForces() {
     } else {
       dx1= powf((obj[i].x - bodies[0].x),2);
     }
-    float dx2 = powf((obj[i].x - bodies[1].x),2);
+    float dx2 = powf((bodies[1].x - obj[i].y),2);
     float dy1 = powf((obj[i].y - bodies[0].y),2);
     float dy2 = powf((obj[i].y - bodies[1].y),2);
 
