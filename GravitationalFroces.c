@@ -35,23 +35,27 @@ void InitStructs() {
     obj[i].fy = 0;
   }
   for (int j=0; j<BODY; j++) {
-    obj[j].radius = j<1?MASS1/2:MASS2/2;
-    obj[j].x = j<1?MASS1+MASS1/2:MASS2+MASS2/2;
-    obj[j].y = HEIGHT/2 ;
-    obj[j].vx = 5;
-    obj[j].vy = 5;
-    obj[j].fx = 0;
-    obj[j].fy = 0;
+    bodies[j].radius = j<1?MASS1/2:MASS2/2;
+    bodies[j].x = j<1?MASS1+MASS1/2:MASS2+MASS2/2;
+    bodies[j].y = HEIGHT/2 ;
+    bodies[j].vx = 5;
+    bodies[j].vy = 5;
+    bodies[j].fx = 0;
+    bodies[j].fy = 0;
   }
 }
 
 void DrawStructs() {
+  for (int j=0; j<BODY;j++) {
+    DrawCircle(bodies[j].x, bodies[j].y, bodies[j].radius, DARKGRAY);
+  }
   for (int i=0; i<OBJ; i++) {
     DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
   }
-  for (int j=0; j<BODY;j++) {
-    DrawCircle(bodies[j].x, bodies[j].y, bodies[j].radius, GRAY);
-  }
+}
+
+void UpdateStructs() {
+  
 }
 
 int main() {
@@ -62,6 +66,7 @@ int main() {
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(BLACK);
+    UpdateStructs();
     DrawStructs();
     EndDrawing();
   }
