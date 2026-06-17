@@ -23,17 +23,16 @@ typedef struct  {
 
 Objects obj[OBJ];
 Bodies bodies[BODY];
-float G = 6.67*powf(10,-11);
+float G = 0.00005;//6.67*powf(10,-11);
 
-float d1, d2;
 
 void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
     obj[i].y = i==0? 60 : (((HEIGHT + R_OBJ)/OBJ) * i) ;
-    obj[i].vx = 10;
-    obj[i].vy = 10;
+    obj[i].vx = 5;
+    obj[i].vy = 0;
     obj[i].fx = 0;
     obj[i].fy = 0;
   }
@@ -64,8 +63,8 @@ void UpdateForces(float dt) {
     float dy1 = powf((bodies[0].y - obj[i].y),2);
     float dy2 = powf((bodies[1].y - obj[i].y),2);
 
-    d1 = sqrt(dx1 + dy1);
-    d2 = sqrt(dx2 + dy2);
+    float d1 = sqrt(dx1 + dy1);
+    float d2 = sqrt(dx2 + dy2);
 
     if (d1<=bodies[0].radius){
     
@@ -94,8 +93,8 @@ void ComputeForces() {
     float dy1 = powf((obj[i].y - bodies[0].y),2);
     float dy2 = powf((obj[i].y - bodies[1].y),2);
 
-    d1 = sqrt(dx1 + dy1);
-    d2 = sqrt(dx2 + dy2);
+    float d1 = sqrt(dx1 + dy1);
+    float d2 = sqrt(dx2 + dy2);
 
     d1<1?d1=1:d1;
     d2<1?d2=1:d2;
@@ -113,8 +112,8 @@ void ComputeForces() {
     float fx2 = f2 * nx2;
     float fy2 = f2 * ny2;
 
-    obj[i].fx -= fx1 + fx2;
-    obj[i].fy -= fy1 + fy2;
+    obj[i].fx += fx1 + fx2;
+    obj[i].fy += fy1 + fy2;
   } 
 }
 
@@ -126,7 +125,7 @@ int main() {
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(BLACK);
-    ResetForces();
+    //ResetForces();
     ComputeForces();
     UpdateForces(GetFrameTime());
     DrawStructs();
