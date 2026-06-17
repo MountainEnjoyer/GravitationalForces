@@ -108,10 +108,10 @@ void ResetForces() {
 void ComputeForces() {
   for (int i=0; i<OBJ;i++) {
     float dx1;
-    if ((bodies[0].x - obj[i].x)+sqrt(powf((obj[i].x - bodies[0].x),2)) == 0) {
-      dx1= powf((obj[i].x - bodies[0].x),2) * -1;
+    if ((bodies[0].x - obj[i].x)+((bodies[0].x - obj[i].x)) == 0) {
+      dx1= powf((bodies[0].x- obj[i].x),2) * -1;
     } else {
-      dx1= powf((obj[i].x - bodies[0].x),2);
+      dx1= powf((bodies[0].x - obj[i].x),2);
     }
     float dx2 = powf((bodies[1].x - obj[i].y),2);
     float dy1 = powf((obj[i].y - bodies[0].y),2);
@@ -162,4 +162,3 @@ int main() {
   CloseWindow();
   return 0;
 }
-
