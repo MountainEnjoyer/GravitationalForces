@@ -5,11 +5,11 @@
 #define WIDTH 1200
 #define HEIGHT 600
 #define FPS 60
-#define OBJ 20
+#define OBJ 50
 #define R_OBJ 2
 #define BODY 2
-#define MASS1 100
-#define MASS2 400
+#define MASS1 1000
+#define MASS2 4000
 
 typedef struct  {
   float x,y,radius,vx,vy,fx,fy;
@@ -37,8 +37,8 @@ void InitStructs() {
     obj[i].fy = 0;
   }
   for (int j=0; j<BODY; j++) {
-    bodies[j].radius = j<1?MASS1/2:MASS2/2;
-    bodies[j].x = j<1?MASS1+MASS1/2:MASS2+MASS2;
+    bodies[j].radius = j<1?50:200;
+    bodies[j].x = j<1?150:600;
     bodies[j].y = HEIGHT/2 ;
     bodies[j].vx = 5;
     bodies[j].vy = 5;
