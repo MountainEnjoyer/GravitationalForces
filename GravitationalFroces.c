@@ -38,7 +38,7 @@ void InitStructs() {
   }
   for (int j=0; j<BODY; j++) {
     bodies[j].radius = j<1?50:200;
-    bodies[j].x = j<1?150:600;
+    bodies[j].x = j<1?150:700;
     bodies[j].y = HEIGHT/2 ;
     bodies[j].vx = 5;
     bodies[j].vy = 5;
