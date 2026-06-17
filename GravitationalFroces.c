@@ -28,7 +28,7 @@ void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
-    obj[i].y = ((HEIGHT+ R_OBJ*2)/OBJ) * i+1 ;
+    obj[i].y = i==0? 60 : (((HEIGHT + R_OBJ)/OBJ) * i) ;
     obj[i].vx = 5;
     obj[i].vy = 5;
     obj[i].fx = 0;
@@ -55,7 +55,21 @@ void DrawStructs() {
 }
 
 void UpdateStructs() {
-  
+  for (int i=0; i<OBJ;i++) {
+    obj[i].radius = R_OBJ;
+    
+    if (sqrt(powf((bodies[0].x - obj[i].x),2) + powf((bodies[0].y - obj[i].y),2))<=bodies[0].radius){
+
+    }else if (sqrt(powf((bodies[1].x - obj[i].x),2) + powf((bodies[1].y - obj[i].y),2))<=bodies[1].radius) {
+
+    } else {
+      obj[i].x += R_OBJ;
+    }
+    obj[i].vx = 5;
+    obj[i].vy = 5;
+    obj[i].fx = 0;
+    obj[i].fy = 0;
+  } 
 }
 
 int main() {
