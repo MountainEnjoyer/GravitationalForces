@@ -7,9 +7,13 @@
 #define FPS 60
 #define OBJ 50
 #define R_OBJ 2
+#define MASS_OBJ 10
 #define BODY 2
-#define MASS1 1000
-#define MASS2 4000
+#define MASS1 200
+#define MASS2 500
+#define G 0.0005 // supposed to be 6.67*powf(10,-11);
+
+
 
 typedef struct  {
   float x,y,radius,vx,vy,fx,fy;
@@ -21,30 +25,38 @@ typedef struct  {
   float mass;
 }Objects;
 
+typedef struct {
+  Vector2 pos[100];
+}Trail; 
+
 Objects obj[OBJ];
 Bodies bodies[BODY];
-float G = 0.00005;//6.67*powf(10,-11);
+Trail trail[OBJ];
 
+int current_trail = 0;
 
 void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
     obj[i].y = i==0? 60 : (((HEIGHT + R_OBJ)/OBJ) * i) ;
-    obj[i].vx = 5;
+    obj[i].vx = 1;
     obj[i].vy = 0;
     obj[i].fx = 0;
     obj[i].fy = 0;
+    obj[i].mass = MASS_OBJ;
+    trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
   }
   for (int j=0; j<BODY; j++) {
     bodies[j].radius = j<1?50:200;
-    bodies[j].x = j<1?150:700;
-    bodies[j].y = HEIGHT/2 ;
-    bodies[j].vx = 5;
-    bodies[j].vy = 5;
+    bodies[j].x = j<1?150:900;
+    bodies[j].y = j<1?HEIGHT/3:HEIGHT/2 ;
+    bodies[j].vx = 0;
+    bodies[j].vy = 0;
     bodies[j].fx = 0;
     bodies[j].fy = 0;
   }
+  current_trail+=1;
 }
 
 void DrawStructs() {
@@ -53,6 +65,9 @@ void DrawStructs() {
   }
   for (int i=0; i<OBJ; i++) {
     DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
+    for (int h=0; h<current_trail; h++) {
+      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,WHITE);
+    }
   }
 }
 
@@ -88,7 +103,12 @@ void ResetForces() {
 
 void ComputeForces() {
   for (int i=0; i<OBJ;i++) {
-    float dx1= powf((obj[i].x - bodies[0].x),2);
+    float dx1;
+    if ((bodies[0].x - obj[i].x)+sqrt(powf((obj[i].x - bodies[0].x),2)) == 0) {
+      dx1= powf((obj[i].x - bodies[0].x),2) * -1;
+    } else {
+      dx1= powf((obj[i].x - bodies[0].x),2);
+    }
     float dx2 = powf((obj[i].x - bodies[1].x),2);
     float dy1 = powf((obj[i].y - bodies[0].y),2);
     float dy2 = powf((obj[i].y - bodies[1].y),2);
@@ -96,24 +116,24 @@ void ComputeForces() {
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
 
-    d1<1?d1=1:d1;
-    d2<1?d2=1:d2;
+    //d1<1?d1=1:d1;
+    //d2<1?d2=1:d2;
 
     float nx1= dx1/d1;
     float ny1= dy1/d1;
     float nx2= dx2/d2;
     float ny2= dy2/d2;
 
-    float f1 = G * (R_OBJ*MASS1/d1);
-    float f2 = G * (R_OBJ*MASS2/d2);
+    float f1 = G * (MASS_OBJ*MASS1/d1);
+    float f2 = G * (MASS_OBJ*MASS2/d2);
 
     float fx1 = f1 * nx1;
     float fy1 = f1 * ny1;
     float fx2 = f2 * nx2;
     float fy2 = f2 * ny2;
 
-    obj[i].fx += fx1 + fx2;
-    obj[i].fy += fy1 + fy2;
+    obj[i].fx += fx1; //+ fx2;
+    obj[i].fy += fy1;// + fy2;
   } 
 }
 
@@ -123,6 +143,9 @@ int main() {
   SetTargetFPS(FPS);
   InitStructs();
   while (!WindowShouldClose()) {
+    if (IsKeyPressed(KEY_ENTER)) {
+      InitStructs();
+    }
     BeginDrawing();
     ClearBackground(BLACK);
     //ResetForces();
