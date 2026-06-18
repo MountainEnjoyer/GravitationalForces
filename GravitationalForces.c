@@ -11,7 +11,7 @@
 #define BODY 2
 #define MASS1 200
 #define MASS2 500
-#define G 0.0005 // supposed to be 6.67*powf(10,-11);
+#define G 0.0001 // supposed to be 6.67*powf(10,-11);
 #define L_TRAIL 1000
 
 
@@ -108,14 +108,14 @@ void ResetForces() {
 void ComputeForces() {
   for (int i=0; i<OBJ;i++) {
     float dx1;
-    if ((bodies[0].x - obj[i].x)+((bodies[0].x - obj[i].x)) == 0) {
-      dx1= powf((bodies[0].x- obj[i].x),2) * -1;
-    } else {
+    //if ((bodies[0].x - obj[i].x)+((bodies[0].x - obj[i].x)) == 0) {
+    //  dx1= powf((bodies[0].x- obj[i].x),2) * -1;
+    //} else {
       dx1= powf((bodies[0].x - obj[i].x),2);
-    }
-    float dx2 = powf((bodies[1].x - obj[i].y),2);
-    float dy1 = powf((obj[i].y - bodies[0].y),2);
-    float dy2 = powf((obj[i].y - bodies[1].y),2);
+    //}/
+    float dx2 = powf((bodies[1].x - obj[i].x ),2);
+    float dy1 = powf((bodies[0].y - obj[i].y),2);
+    float dy2 = powf((bodies[1].y - obj[i].y),2);
 
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
@@ -136,8 +136,8 @@ void ComputeForces() {
     float fx2 = f2 * nx2;
     float fy2 = f2 * ny2;
 
-    obj[i].fx += fx1; //+ fx2;
-    obj[i].fy += fy1;// + fy2;
+    obj[i].fx += fx1+ fx2;
+    obj[i].fy += fy1+ fy2;
   } 
 }
 
@@ -152,7 +152,7 @@ int main() {
     }
     BeginDrawing();
     ClearBackground(BLACK);
-    //ResetForces();
+    ResetForces();
     ComputeForces();
     UpdateForces(GetFrameTime());
     DrawStructs();
