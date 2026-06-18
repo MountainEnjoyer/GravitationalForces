@@ -1,15 +1,16 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <raylib.h>
 
-#define WIDTH 1200
-#define HEIGHT 600
+#define WIDTH 1920
+#define HEIGHT 1080
 #define FPS 60
 #define OBJ 100
 #define R_OBJ 2
 #define MASS_OBJ 10
 #define BODY 2
-#define MASS1 200
+#define MASS1 100
 #define MASS2 500
 #define G 0.6 // supposed to be 6.67*powf(10,-11);
 #define L_TRAIL 250
@@ -36,7 +37,7 @@ void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
-    obj[i].y = i==0? 60 : (((HEIGHT + R_OBJ)/OBJ) * i) ;
+    obj[i].y = i==0? : (((HEIGHT + R_OBJ*2)/OBJ) * i) ;
     obj[i].vx = 10;
     obj[i].vy = 0;
     obj[i].fx = 0;
@@ -60,9 +61,11 @@ void DrawStructs() {
     DrawCircle(bodies[j].x, bodies[j].y, bodies[j].radius, DARKGRAY);
   }
   for (int i=0; i<OBJ; i++) {
-    for (int h=L_TRAIL; h>=0; h--) {
-      if (h >= L_TRAIL/2) {
-      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,GRAY);
+  for (int h=L_TRAIL; h>=0; h--) {
+      if (h >= L_TRAIL-1) {
+        DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,DARKGRAY);
+      } else if (h >= L_TRAIL/2) {
+        DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,GRAY);
       } else {
         DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
       }
@@ -81,10 +84,10 @@ void UpdateForces(float dt) {
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
 
-    if (d1<=bodies[0].radius){
-    
-    }else if (d2<=bodies[1].radius) {
-    
+    if (d1<=bodies[0].radius || d2<=bodies[1].radius){
+      for (int h=L_TRAIL; h>=0;h--) {
+        trail[i].pos[h] = (Vector2) {-R_OBJ, -R_OBJ};
+      }
     } else {
       obj[i].vx += obj[i].fx * dt;
       obj[i].vy += obj[i].fy * dt;
@@ -107,12 +110,7 @@ void ResetForces() {
 
 void ComputeForces() {
   for (int i=0; i<OBJ;i++) {
-    float dx1;
-    //if ((bodies[0].x - obj[i].x)+((bodies[0].x - obj[i].x)) == 0) {
-    //  dx1= powf((bodies[0].x- obj[i].x),2) * -1;
-    //} else {
-      dx1= powf((bodies[0].x - obj[i].x),2);
-    //}/
+    float dx1 = powf((bodies[0].x - obj[i].x),2);
     float dx2 = powf((bodies[1].x - obj[i].x ),2);
     float dy1 = powf((bodies[0].y - obj[i].y),2);
     float dy2 = powf((bodies[1].y - obj[i].y),2);
@@ -120,8 +118,8 @@ void ComputeForces() {
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
 
-    //d1<1?d1=1:d1;
-    //d2<1?d2=1:d2;
+    d1<1?d1=1:d1;
+    d2<1?d2=1:d2;
 
     float nx1= dx1/d1;
     float ny1= dy1/d1;
@@ -164,6 +162,7 @@ void ComputeForces() {
 }
 
 int main() {
+  SetConfigFlags(FLAG_FULLSCREEN_MODE);
   InitWindow(WIDTH,HEIGHT,"Gravitaional Forces Simulation");
 
   SetTargetFPS(FPS);
