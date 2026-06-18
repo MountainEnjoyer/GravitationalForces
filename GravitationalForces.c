@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <raylib.h>
 
-#define WIDTH 1920
-#define HEIGHT 1080
+#define WIDTH 1200
+#define HEIGHT 900
 #define FPS 60
 #define OBJ 100
 #define R_OBJ 2
 #define MASS_OBJ 10
+#define XSPEED_OBJ 10
+#define YSPEED_OBJ 0
 #define BODY 2
 #define MASS1 100
 #define MASS2 500
@@ -37,9 +39,9 @@ void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
-    obj[i].y = i==0? : (((HEIGHT + R_OBJ*2)/OBJ) * i) ;
-    obj[i].vx = 10;
-    obj[i].vy = 0;
+    obj[i].y = i==0? : (((HEIGHT + R_OBJ*3)/OBJ) * i) ;
+    obj[i].vx = XSPEED_OBJ;
+    obj[i].vy = YSPEED_OBJ;
     obj[i].fx = 0;
     obj[i].fy = 0;
     obj[i].mass = MASS_OBJ;
@@ -61,14 +63,8 @@ void DrawStructs() {
     DrawCircle(bodies[j].x, bodies[j].y, bodies[j].radius, DARKGRAY);
   }
   for (int i=0; i<OBJ; i++) {
-  for (int h=L_TRAIL; h>=0; h--) {
-      if (h >= L_TRAIL-1) {
-        DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,DARKGRAY);
-      } else if (h >= L_TRAIL/2) {
-        DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,GRAY);
-      } else {
-        DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
-      }
+    for (int h=L_TRAIL-1; h>=0; h--) {
+      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
     }
     DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
   }
@@ -84,20 +80,20 @@ void UpdateForces(float dt) {
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
 
-    if (d1<=bodies[0].radius || d2<=bodies[1].radius){
-      for (int h=L_TRAIL; h>=0;h--) {
-        trail[i].pos[h] = (Vector2) {-R_OBJ, -R_OBJ};
-      }
+    if (d1<=bodies[0].radius) {
+
+    } else if (d2<=bodies[1].radius){
+
     } else {
       obj[i].vx += obj[i].fx * dt;
       obj[i].vy += obj[i].fy * dt;
       obj[i].x += obj[i].vx *dt;
       obj[i].y += obj[i].vy * dt;  
-      for (int j=L_TRAIL; j>=0; j--) {
-        trail[i].pos[j+1] = trail[i].pos[j];
-      }
-      trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
     }
+    for (int j=L_TRAIL; j>=0; j--) {
+      trail[i].pos[j+1] = trail[i].pos[j];
+    }
+    trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
   }
 }
 
@@ -118,8 +114,8 @@ void ComputeForces() {
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
 
-    d1<1?d1=1:d1;
-    d2<1?d2=1:d2;
+    //d1<1?d1=1:d1;
+    //d2<1?d2=1:d2;
 
     float nx1= dx1/d1;
     float ny1= dy1/d1;
