@@ -12,8 +12,7 @@
 #define MASS1 200
 #define MASS2 500
 #define G 0.6 // supposed to be 6.67*powf(10,-11);
-#define L_TRAIL 1000
-
+#define L_TRAIL 250
 
 typedef struct  {
   float x,y,radius,vx,vy,fx,fy;
@@ -33,8 +32,6 @@ Objects obj[OBJ];
 Bodies bodies[BODY];
 Trail trail[OBJ];
 
-int current_trail = 0;
-
 void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
@@ -45,7 +42,7 @@ void InitStructs() {
     obj[i].fx = 0;
     obj[i].fy = 0;
     obj[i].mass = MASS_OBJ;
-    trail[i].pos[current_trail] = (Vector2) {obj[i].x, obj[i].y};
+    trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
   }
   for (int j=0; j<BODY; j++) {
     bodies[j].radius = j<1?50:200;
@@ -56,7 +53,6 @@ void InitStructs() {
     bodies[j].fx = 0;
     bodies[j].fy = 0;
   }
-  current_trail = 1;
 }
 
 void DrawStructs() {
@@ -64,8 +60,12 @@ void DrawStructs() {
     DrawCircle(bodies[j].x, bodies[j].y, bodies[j].radius, DARKGRAY);
   }
   for (int i=0; i<OBJ; i++) {
-    for (int h=0; h<current_trail; h++) {
-      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
+    for (int h=L_TRAIL; h>=0; h--) {
+      if (h >= L_TRAIL/2) {
+      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,GRAY);
+      } else {
+        DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
+      }
     }
     DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
   }
@@ -89,13 +89,13 @@ void UpdateForces(float dt) {
       obj[i].vx += obj[i].fx * dt;
       obj[i].vy += obj[i].fy * dt;
       obj[i].x += obj[i].vx *dt;
-      obj[i].y += obj[i].vy * dt;
-      if (current_trail< L_TRAIL){
-        trail[i].pos[current_trail] = (Vector2) {obj[i].x, obj[i].y};
+      obj[i].y += obj[i].vy * dt;  
+      for (int j=L_TRAIL; j>=0; j--) {
+        trail[i].pos[j+1] = trail[i].pos[j];
       }
+      trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
     }
   }
-  current_trail +=1;
 }
 
 void ResetForces() {
@@ -130,14 +130,36 @@ void ComputeForces() {
 
     float f1 = G * (MASS_OBJ*MASS1/powf(d1,2));
     float f2 = G * (MASS_OBJ*MASS2/powf(d2,2));
-
+    
     float fx1 = f1 * nx1;
     float fy1 = f1 * ny1;
     float fx2 = f2 * nx2;
     float fy2 = f2 * ny2;
+    
+    if(obj[i].y > bodies[0].y) {
+      obj[i].fy -= fy1;
+    } else {
+      obj[i].fy += fy1;
 
-    obj[i].fx += fx1+ fx2;
-    obj[i].fy += fy1+ fy2;
+    }
+      if(obj[i].x > bodies[0].x) {
+      obj[i].fx -= fx1;
+    } else {
+      obj[i].fx += fx1;
+
+    }
+    if(obj[i].y > bodies[1].y) {
+      obj[i].fy -= fy2;
+    } else {
+      obj[i].fy += fy2;
+
+    }
+      if(obj[i].x > bodies[1].x) {
+      obj[i].fx -= fx2;
+    } else {
+      obj[i].fx += fx2;
+
+    }
   } 
 }
 
