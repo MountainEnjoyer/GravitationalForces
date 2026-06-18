@@ -11,7 +11,7 @@
 #define BODY 2
 #define MASS1 200
 #define MASS2 500
-#define G 0.0001 // supposed to be 6.67*powf(10,-11);
+#define G 0.6 // supposed to be 6.67*powf(10,-11);
 #define L_TRAIL 1000
 
 
@@ -40,7 +40,7 @@ void InitStructs() {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
     obj[i].y = i==0? 60 : (((HEIGHT + R_OBJ)/OBJ) * i) ;
-    obj[i].vx = 1;
+    obj[i].vx = 10;
     obj[i].vy = 0;
     obj[i].fx = 0;
     obj[i].fy = 0;
@@ -128,8 +128,8 @@ void ComputeForces() {
     float nx2= dx2/d2;
     float ny2= dy2/d2;
 
-    float f1 = G * (MASS_OBJ*MASS1/d1);
-    float f2 = G * (MASS_OBJ*MASS2/d2);
+    float f1 = G * (MASS_OBJ*MASS1/powf(d1,2));
+    float f2 = G * (MASS_OBJ*MASS2/powf(d2,2));
 
     float fx1 = f1 * nx1;
     float fy1 = f1 * ny1;
