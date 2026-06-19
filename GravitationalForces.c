@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <raylib.h>
 
-#define WIDTH 1200
-#define HEIGHT 900
+#define WIDTH 1920
+#define HEIGHT 1100
 #define FPS 60
 #define OBJ 100
 #define R_OBJ 2
@@ -39,7 +39,7 @@ void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
-    obj[i].y = (((HEIGHT + R_OBJ*3)/OBJ) * i) +R_OBJ ;
+    obj[i].y = (((HEIGHT)/OBJ) * i) +R_OBJ ;
     obj[i].vx = XSPEED_OBJ;
     obj[i].vy = YSPEED_OBJ;
     obj[i].fx = 0;
@@ -50,7 +50,7 @@ void InitStructs() {
   }
   for (int j=0; j<BODY; j++) {
     bodies[j].radius = j<1?50:200;
-    bodies[j].x = j<1?150:900;
+    bodies[j].x = j<1?150:WIDTH/2;
     bodies[j].y = j<1?HEIGHT/3:HEIGHT/2 ;
     bodies[j].vx = 0;
     bodies[j].vy = 0;
