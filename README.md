@@ -56,7 +56,7 @@ This program uses F as :
 It allow us to calculate the force applied on the flying objects.
 The point is to simulate how gravitational forces are moving objects through space.
 Two Spatial Bodies are displayed on the screen while flying objects go through x and are being pulled by these bodies gravitaional forces.
-You can adjust the numbers of objects, the speed of the objects, the constant G, and the coordonates of the each spatial body.
+You can adjust the numbers of objects, the speed of the objects, the constant G, and the mass and coordonates of each spatial body.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
