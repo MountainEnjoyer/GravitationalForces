@@ -1,23 +1,5 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a id="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -25,7 +7,6 @@
 [![Unlicense License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
 
@@ -43,9 +24,6 @@
   </p>
 </div>
 
-
-
-<!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -71,9 +49,15 @@
   </ol>
 </details>
 
+## Usage
 
+This program uses $$F =  G. \frac{m_1 * m_2}{d²} $$ to calculate the force applied on the flying objects.
+The point is to simulate how gravitational forces are moving objects through space.
+Two Spatial Bodies are displayed on the screen while flying objects go through x and are being pulled by these bodies gravitaional forces.
+You can adjust the numbers of objects, the speed of the objects, the constant G, and the coordonates of the each spatial body.
 
-<!-- ABOUT THE PROJECT -->
+<p align="right"><a href="#readme-top">back to top</a></p>
+
 ## About The Project
 
 https://github.com/user-attachments/assets/bfdc378c-96ef-426d-ae1c-a3c07be4d3f1
@@ -84,17 +68,12 @@ INTRO
 
 
 
-### Built With
-C as the programming language, Raylib as the graphical library and gcc as the compuker.
-* [![C][C]][C-url] 
-* [![Raylib][Raylib]][Raylib-url] 
-* [![gcc][Gcc]][Gcc-url]
+### Built With :
+[![C][C]][C-url] [![Raylib][Raylib]][Raylib-url] [![gcc][Gcc]][Gcc-url] <br/>
+C as the programming language, Raylib as the graphical library and gcc as the compuker
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 To get a local copy up and running, follow these simple steps.
@@ -150,21 +129,6 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-This program uses $$F =  G. \frac{m_1 * m_2}{d²} $$ to calculate the force applied on the flying objects.
-The point is to simulate how gravitational forces are moving objects through space.
-Two Spatial Bodies are displayed on the screen while flying objects go through x and are being pulled by these bodies gravitaional forces.
-You can adjust the numbers of objects, the speed of the objects, the constant G, and the coordonates of the each spatial body.
-
-
-<p align="right"><a href="#readme-top">back to top</a></p>
-
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -195,9 +159,6 @@ Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
-
-
-<!-- CONTACT -->
 ## Contact
 
 Zakary CHAUVE - contact@zakary.xyz
@@ -209,7 +170,6 @@ Project Link: [https://github.com/MountainEnjoyer/GravitationalForces](https://g
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/MountainEnjoyer/GravitationalForces.svg?style=for-the-badge
 [contributors-url]: https://github.com/MountainEnjoyer/GravitationalForces/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/MountainEnjoyer/GravitationalForces.svg?style=for-the-badge
