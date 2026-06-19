@@ -39,13 +39,14 @@ void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
-    obj[i].y = i==0? : (((HEIGHT + R_OBJ*3)/OBJ) * i) ;
+    obj[i].y = (((HEIGHT + R_OBJ*3)/OBJ) * i) +R_OBJ ;
     obj[i].vx = XSPEED_OBJ;
     obj[i].vy = YSPEED_OBJ;
     obj[i].fx = 0;
     obj[i].fy = 0;
     obj[i].mass = MASS_OBJ;
-    trail[i].pos[0] = (Vector2) {obj[i].x, obj[i].y};
+    for (int h = L_TRAIL; h>=0; h--)
+      trail[i].pos[h] = (Vector2) {obj[i].x, obj[i].y};
   }
   for (int j=0; j<BODY; j++) {
     bodies[j].radius = j<1?50:200;
@@ -80,9 +81,9 @@ void UpdateForces(float dt) {
     float d1 = sqrt(dx1 + dy1);
     float d2 = sqrt(dx2 + dy2);
 
-    if (d1<=bodies[0].radius) {
+    if (d1+0.5<=bodies[0].radius) {
 
-    } else if (d2<=bodies[1].radius){
+    } else if (d2+0.5<=bodies[1].radius){
 
     } else {
       obj[i].vx += obj[i].fx * dt;
