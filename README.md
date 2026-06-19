@@ -27,12 +27,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#abt">About The Project</a></li>
+    <li><a href="#built">Built With</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -40,16 +37,14 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 ## Usage
+<div id="usage"></div>
 
 This program uses F as :
 ### $$F =  G. \frac{m_1 * m_2}{d²} $$ 
@@ -61,26 +56,27 @@ You can adjust the numbers of objects, the speed of the objects, the constant G,
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 ## About The Project
+<div id="abt"></div>
 
 https://github.com/user-attachments/assets/bfdc378c-96ef-426d-ae1c-a3c07be4d3f1
 
-INTRO
-
 <p align="right"><a href="#readme-top">back to top</a></p>
 
-
-
 ### Built With :
+<div id="built"></div>
+
 [![C][C]][C-url] [![Raylib][Raylib]][Raylib-url] [![gcc][Gcc]][Gcc-url] <br/>
-C as the programming language, Raylib as the graphical library and gcc as the compuker
+Gcc as the compiler, C as the programming language and Raylib as the graphical library.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 ## Getting Started
+<div id="getting-started"></div>
 
 To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
+<div id="prerequisites"></div>
 
 This is an example of how to list things you need to use the software and how to install them.
 * on Arch Linux :
@@ -92,6 +88,7 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
+<div id="installation"></div>
 
 1. Clone the repo
    ```sh
@@ -132,6 +129,7 @@ This is an example of how to list things you need to use the software and how to
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 ## Contributing
+<div id="contributing"></div>
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -156,12 +154,14 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- LICENSE -->
 ## License
+<div id="license"></div>
 
 Distributed under the Unlicense License. See `LICENSE.txt` for more information.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 ## Contact
+<div id="contact"></div>
 
 Zakary CHAUVE - contact@zakary.xyz
 
