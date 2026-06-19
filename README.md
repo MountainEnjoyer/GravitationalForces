@@ -15,7 +15,7 @@
   <p align="center">
     A simulation of Gravitational Forces applied on flying object using Raylib.
     <br />
-    <a href="https://github.com/MountainEnjoyer/GravitationalForces"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/MountainEnjoyer/GravitationalForces"><strong>Explore the files »</strong></a>
     <br />
     <br />
     <a href="https://github.com/MountainEnjoyer/GravitationalForces/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
@@ -26,10 +26,10 @@
 
 <details>
   <summary>Table of Contents</summary>
-  <ol>
+  <ol >
     <li><a href="#usage">Usage</a></li>
     <li><a href="#abt">About The Project</a></li>
-    <li><a href="#built">Built With</a></li>
+    <ul><li><a href="#built">Built With</a></li></ul>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -46,26 +46,24 @@
 ## Usage
 <div id="usage"></div>
 
-This program uses F as :
+This program uses F as following, to calculate the force applied on the flying objects.
 ### $$F =  G. \frac{m_1 * m_2}{d²} $$ 
-It allow us to calculate the force applied on the flying objects.
+
 The point is to simulate how gravitational forces are moving objects through space.
-Two Spatial Bodies are displayed on the screen while flying objects go through x and are being pulled by these bodies gravitaional forces.
-You can adjust the numbers of objects, the speed of the objects, the constant G, and the mass and coordonates of each spatial body.
+Two Spatial Bodies are displayed on the screen while flying objects go through $$x$$ and are being pulled by their gravitational forces.
+You can adjust the numbers of objects, the speed of the objects, the constant $$G$$, and the mass and coordonates of each spatial body.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
-## About The Project
+## Demonstration
 <div id="abt"></div>
 
 https://github.com/user-attachments/assets/bfdc378c-96ef-426d-ae1c-a3c07be4d3f1
 
-<p align="right"><a href="#readme-top">back to top</a></p>
-
 ### Built With :
 <div id="built"></div>
 
-[![C][C]][C-url] [![Raylib][Raylib]][Raylib-url] [![gcc][Gcc]][Gcc-url] <br/>
+[![gcc][Gcc]][Gcc-url] [![C][C]][C-url] [![Raylib][Raylib]][Raylib-url]  <br/>
 Gcc as the compiler, C as the programming language and Raylib as the graphical library.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
