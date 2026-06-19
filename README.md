@@ -158,9 +158,11 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+This program uses $$F =  G. \frac{m_1 * m_2}{d²} $$ to calculate the force applied on the flying objects.
+The point is to simulate how gravitational forces are moving objects through space.
+Two Spatial Bodies are displayed on the screen while flying objects go through x and are being pulled by these bodies gravitaional forces.
+You can adjust the numbers of objects, the speed of the objects, the constant G, and the coordonates of the each spatial body.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
