@@ -47,7 +47,7 @@
 <div id="usage"></div>
 
 This program uses F as following, to calculate the force applied on the flying objects.
-### $$F =  G. \frac{m_1 * m_2}{d²} $$ 
+### $$F =  G. \frac{m_1.m_2}{d²} $$ 
 
 The point is to simulate how gravitational forces are moving objects through space.
 Two Spatial Bodies are displayed on the screen while flying objects go through $$x$$ and are being pulled by their gravitational forces.
