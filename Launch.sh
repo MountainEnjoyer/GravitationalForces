@@ -40,6 +40,9 @@ echo "You'll be asked for each variable, if there's one that you wanna leave as 
 echo ""
 read -p "Number of flying object ? (DEFAULT: 100)" n_obj
 
+# pulling the defined variables
+head -18 Files/GravitationalForces.c | tail -13
+
 read -p "Ready ?(Y/n) :" launch
 
 case $launch in
