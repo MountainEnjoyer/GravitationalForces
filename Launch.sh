@@ -26,3 +26,16 @@ echo ""
 echo "To launch the simulation there is a number of variable that you can change."
 echo "You'll be asked for each variable, if there's one that you wanna leave as default. DO NOT ENTER A VALUE"
 echo ""
+read -p "Ready ?(Y/n) :" launch
+
+case $launch in
+y)
+  make -C Files/
+  ;;
+n)
+  exit
+  ;;
+*)
+  make -C Files/
+  ;;
+esac
