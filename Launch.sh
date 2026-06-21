@@ -38,10 +38,23 @@ clear
 echo "To launch the simulation there is a number of variable that you can change."
 echo "You'll be asked for each variable, if there's one that you wanna leave as default. DO NOT ENTER A VALUE"
 echo ""
-read -p "Number of flying object ? (DEFAULT: 100)" n_obj
+read -p "Number of flying object ? (DEFAULT: 100)" obj
 
-# pulling the defined variables
-head -18 Files/GravitationalForces.c | tail -13
+case $obj in
+"")
+  N_OBJ=100
+  ;;
+*)
+  if $obj >0 >/dev/null 2>&1 && $obj <1000 >/dev/null 2>&1; then
+    N_OBJ=$obj
+    echo '\n'
+  else
+    N_OBJ=100
+  fi
+  ;;
+esac
+
+echo "#define OBJ $N_OBJ" >>tmp
 
 read -p "Ready ?(Y/n) :" launch
 
@@ -57,3 +70,5 @@ n)
   make -C Files/
   ;;
 esac
+rm 0
+rm tmp

@@ -6,6 +6,10 @@
 // Variables file to modify via bash script
 #include "Variables.h"
 
+#define WIDTH 1920
+#define HEIGHT 1100
+#define FPS 60
+
 typedef struct  {
   float x,y,radius,vx,vy,fx,fy;
   float mass;

@@ -1,6 +1,3 @@
-#define WIDTH 1920
-#define HEIGHT 1100
-#define FPS 60
 #define OBJ 100
 #define R_OBJ 2
 #define MASS_OBJ 10
