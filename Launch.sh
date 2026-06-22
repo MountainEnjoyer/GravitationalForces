@@ -1,4 +1,23 @@
 #!/bin/bash
+VariableAsk() {
+  read -p "$1" data
+  case $data in
+  "")
+    local DATA=$2
+    echo $DATA
+    ;;
+  *)
+    if $data >0 >/dev/null 2>&1 && $data <$3 >/dev/null 2>&1; then
+      local DATA=$data
+      echo $DATA
+      echo '\n'
+    else
+      local DATA=$2
+      echo $DATA
+    fi
+    ;;
+  esac
+}
 
 clear
 
@@ -38,37 +57,37 @@ clear
 echo "To launch the simulation there is a number of variable that you can change."
 echo "You'll be asked for each variable, if there's one that you wanna leave as default. DO NOT ENTER A VALUE"
 echo ""
-read -p "Number of flying object ? (DEFAULT: 100)" obj
 
-case $obj in
-"")
-  N_OBJ=100
-  ;;
-*)
-  if $obj >0 >/dev/null 2>&1 && $obj <1000 >/dev/null 2>&1; then
-    N_OBJ=$obj
-    echo '\n'
-  else
-    N_OBJ=100
-  fi
-  ;;
-esac
+echo "#define OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 100)" 100 1000)" >>tmp
+echo "#define R_OBJ $(VariableAsk "Radius of each flying object ? (DEFAULT: 2)" 2 100)" >>tmp
+echo "#define MASS_OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 10)" 10 10000)" >>tmp
+echo "#define XSPEED_OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 10)" 10 10000)" >>tmp
+echo "#define YSPEED_OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 0)" 0 10000)" >>tmp
+echo "#define BODY $(VariableAsk "Number of flying object ? (DEFAULT: 2)" 2 2)" >>tmp
+echo "#define MASS1 $(VariableAsk "Number of flying object ? (DEFAULT: 100)" 100 10000)" >>tmp
+echo "#define MASS2 $(VariableAsk "Number of flying object ? (DEFAULT: 500)" 500 10000)" >>tmp
+echo "#define G $(VariableAsk "Number of flying object ? (DEFAULT: 0.6)" 0.6 10000)" >>tmp
+echo "#define L_TRAIL $(VariableAsk "Number of flying object ? (DEFAULT: 250)" 250 10000)" >>tmp
 
-echo "#define OBJ $N_OBJ" >>tmp
+mv tmp Files/Variables.h
 
 read -p "Ready ?(Y/n) :" launch
 
 case $launch in
 y)
   make -C Files/
+  rm 0
+  rm Files/Variables.h
   ;;
 n)
+  rm 0
+  rm Files/Variables.h
   clear
   exit
   ;;
 *)
   make -C Files/
+  rm 0
+  rm Files/Variables.h
   ;;
 esac
-rm 0
-rm tmp
