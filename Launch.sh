@@ -1,18 +1,18 @@
 #!/bin/bash
 VariableAsk() {
   read -p "$1" data
+  int='^[+-]?[0-9]+([.][0-9]+)?$'
   case $data in
   "")
     local DATA=$2
     echo $DATA
     ;;
   *)
-    if $data >0 >/dev/null 2>&1 && $data <$3 >/dev/null 2>&1; then
-      local DATA=$data
+    if (($data > "0" && $data < "1000")); then
+      DATA=$data
       echo $DATA
-      echo '\n'
     else
-      local DATA=$2
+      DATA=$2
       echo $DATA
     fi
     ;;
@@ -60,14 +60,15 @@ echo ""
 
 echo "#define OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 100)" 100 1000)" >>tmp
 echo "#define R_OBJ $(VariableAsk "Radius of each flying object ? (DEFAULT: 2)" 2 100)" >>tmp
-echo "#define MASS_OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 10)" 10 10000)" >>tmp
-echo "#define XSPEED_OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 10)" 10 10000)" >>tmp
-echo "#define YSPEED_OBJ $(VariableAsk "Number of flying object ? (DEFAULT: 0)" 0 10000)" >>tmp
-echo "#define BODY $(VariableAsk "Number of flying object ? (DEFAULT: 2)" 2 2)" >>tmp
-echo "#define MASS1 $(VariableAsk "Number of flying object ? (DEFAULT: 100)" 100 10000)" >>tmp
-echo "#define MASS2 $(VariableAsk "Number of flying object ? (DEFAULT: 500)" 500 10000)" >>tmp
-echo "#define G $(VariableAsk "Number of flying object ? (DEFAULT: 0.6)" 0.6 10000)" >>tmp
-echo "#define L_TRAIL $(VariableAsk "Number of flying object ? (DEFAULT: 250)" 250 10000)" >>tmp
+echo "#define MASS_OBJ $(VariableAsk "Mass of each flying object ? (DEFAULT: 10)" 10 10000)" >>tmp
+echo "#define XSPEED_OBJ $(VariableAsk "X speed of each flying object ? (DEFAULT: 10)" 10 10000)" >>tmp
+echo "#define YSPEED_OBJ $(VariableAsk "Y speed of each flying object ? (DEFAULT: 0)" 0 10000)" >>tmp
+#echo "#define BODY $(VariableAsk "Number of Spactial Bodies ? (DEFAULT: 2)" 2 2)" >>tmp
+echo "#define BODY 2" >>tmp
+echo "#define MASS1 $(VariableAsk "Mass of the first body ? (DEFAULT: 100)" 100 10000)" >>tmp
+echo "#define MASS2 $(VariableAsk "Mass of the second body ? (DEFAULT: 500)" 500 10000)" >>tmp
+echo "#define G $(VariableAsk "Gravity's Constant? (DEFAULT: 0.6)" 0.6 10000)" >>tmp
+echo "#define L_TRAIL $(VariableAsk "Lenght of the object's trail? (DEFAULT: 250)" 250 10000)" >>tmp
 
 mv tmp Files/Variables.h
 
