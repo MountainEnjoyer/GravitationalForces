@@ -32,7 +32,7 @@ void InitStructs() {
   for (int i=0; i<OBJ; i++) {
     obj[i].radius = R_OBJ;
     obj[i].x = R_OBJ;
-    obj[i].y = (((HEIGHT)/OBJ) * i) +R_OBJ ;
+    obj[i].y = (((HEIGHT)/OBJ) * i) +R_OBJ*2 ;
     obj[i].vx = XSPEED_OBJ;
     obj[i].vy = YSPEED_OBJ;
     obj[i].fx = 0;
@@ -58,7 +58,7 @@ void DrawStructs() {
   }
   for (int i=0; i<OBJ; i++) {
     for (int h=L_TRAIL-1; h>=0; h--) {
-      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1,LIGHTGRAY);
+      DrawCircle(trail[i].pos[h].x, trail[i].pos[h].y, 1, WHITE);
     }
     DrawCircle(obj[i].x, obj[i].y, obj[i].radius, WHITE);
   }
